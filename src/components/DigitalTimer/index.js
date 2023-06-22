@@ -15,7 +15,9 @@ class DigitalTimer extends Component {
 
   onDecreaseTimer = () => {
     let {setTimer} = this.state
-    setTimer -= 1
+    if (setTimer > 1) {
+      setTimer -= 1
+    }
     this.setState({counterMinutes: setTimer, setTimer})
   }
 
@@ -37,7 +39,7 @@ class DigitalTimer extends Component {
     if (counterSeconds === 0) {
       counterSeconds = 60
       counterMinutes -= 1
-      if (counterMinutes === -1) {
+      if (counterMinutes < 0) {
         clearInterval(this.timerId)
         this.timerId = null
         this.setState({
